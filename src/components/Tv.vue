@@ -1,72 +1,97 @@
 <template>
-  <div class="container">
-    <!-- 嵌入式屏幕 -->
-    <div class="row justify-content-center">
-      <div class="mt-4 col-md-8">
-        <div class="embed-responsive embed-responsive-16by9 shadow sun-frame-bg">
-          <iframe
-            v-if="fullUrl"
-            id="tvFrame"
-            class="embed-responsive-item"
-            :src="fullUrl"
-            allowfullscreen
-          ></iframe>
+  <div>
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container">
+        <a class="navbar-brand" href="/">视频解析</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent"></div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <!-- 嵌入式屏幕 -->
+      <div class="row mt-4 justify-content-center">
+        <div class="col-md-8">
+          <div class="embed-responsive embed-responsive-16by9 shadow sun-frame-bg">
+            <iframe
+              v-if="fullUrl"
+              id="tvFrame"
+              class="embed-responsive-item"
+              :src="fullUrl"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- 输入框表单 -->
-    <div class="row justify-content-center">
-      <form class="mt-3 col-md-8">
-        <div class="form-row justify-content-center">
-          <div class="form-group col-md-3">
-            <select class="form-control" v-model.number="selectOpt">
-              <option :value="0">线路一</option>
-              <option :value="1">线路二</option>
-              <option :value="2">线路三</option>
-            </select>
+      <!-- 输入框表单 -->
+      <div class="row mt-4 justify-content-center">
+        <form class="col-md-8">
+          <div class="form-row justify-content-between">
+            <div class="form-group col-md-3">
+              <select class="form-control" v-model.number="selectOpt">
+                <option :value="0">线路一 🔥</option>
+                <option :value="1">线路二</option>
+                <option :value="2">线路三</option>
+              </select>
+            </div>
+            <div class="form-group col-md-7">
+              <input
+                type="text"
+                v-model.trim="inputUrl"
+                class="form-control"
+                placeholder="输入待解析视频地址"
+              />
+            </div>
+            <div class="form-group col-md-2 text-center">
+              <button @click="handlePlay()" type="button" class="btn btn-primary">开始播放</button>
+            </div>
           </div>
-          <div class="form-group col-md-5">
-            <input type="text" v-model.trim="inputUrl" class="form-control" placeholder="输入待解析视频地址" />
-          </div>
-          <div class="form-group col-md-2">
-            <button @click="handlePlay()" type="button" class="btn btn-primary">开始播放</button>
-          </div>
-        </div>
-      </form>
-    </div>
-
-    <!-- 历史记录 -->
-    <div class="row justify-content-center">
-      <div class="mb-3 mt-3 col-md-8">
-        <ul class="list-group">
-          <li class="list-group-item list-group-item-info">历史记录</li>
-          <li
-            class="list-group-item list-group-item-action"
-            v-for="(item,index) in historys"
-            :key="item"
-          >
-            <p class="m-0 long-warp" v-cloak>
-              {{item.title}}
-              <span v-if="index===0" class="badge badge-success">New</span>
-            </p>
-            <p class="m-0 long-warp" v-cloak>
-              {{item.url}}
-              <a
-                href="javascript:;"
-                @click="copyToClipboard(item.url)"
-                class="badge badge-secondary"
-              >复制链接</a>
-            </p>
-          </li>
-        </ul>
+        </form>
       </div>
-    </div>
 
-    <!-- footer -->
-    <div class="text-center">
-      Copyright © 2019
-      <a href="https://www.seast.net">桑易</a>
+      <!-- 历史记录 -->
+      <div class="row mt-3 justify-content-center" v-if="historys.length>0">
+        <div class="col-md-8">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-primary">历史记录</li>
+            <li
+              class="list-group-item list-group-item-action"
+              v-for="(item,index) in historys"
+              :key="item.url"
+            >
+              <p class="m-0 long-warp" v-cloak>
+                {{item.title}}
+                <span v-if="index===0" class="badge badge-success">最近播放</span>
+              </p>
+              <p class="m-0 long-warp" v-cloak>
+                {{item.url}}
+                <a
+                  href="javascript:;"
+                  @click="copyToClipboard(item.url)"
+                  class="badge badge-secondary"
+                >复制链接</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- footer -->
+      <div class="text-center mt-4">
+        Copyright © 2019
+        <a href="https://www.seast.net">桑易</a>
+      </div>
     </div>
   </div>
 </template>
@@ -78,8 +103,8 @@ export default {
     return {
       historys: [], //历史记录
       apiList: [
+        "http://jqaaa.com/jx.php?url=",   //广告少
         "https://api.spjx.live/?url=",
-        "http://jqaaa.com/jx.php?url=",
         "http://j.zz22x.com/jx/?url="
       ],
       fullUrl: "", //拼接后的全url
