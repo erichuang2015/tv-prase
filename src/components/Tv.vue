@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 导航栏 -->
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container">
         <a class="navbar-brand" href="/">视频解析</a>
@@ -7,10 +8,7 @@
           class="navbar-toggler"
           type="button"
           data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
+          data-target="#navbarSupportedContent"         
         >
           <span class="navbar-toggler-icon"></span>
         </button>
