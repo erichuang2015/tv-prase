@@ -1,0 +1,23 @@
+{
+  "name": "tv-prase",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "core-js": "^3.4.3",
+    "element-ui": "^2.13.0",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.0",
+    "vue": "^2.6.10",
+    "vue-layer": "^1.1.7"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "vue-template-compiler": "^2.6.10"
+  }
+}
